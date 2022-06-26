@@ -1,4 +1,4 @@
-# CustomRetrofit v-1.0.2
+# CustomRetrofit v-1.2.1
 A pre-defined Retforit Instance
  > Step 1. Add the JitPack repository to your build file
 
@@ -17,7 +17,7 @@ dependencies {
 	        implementation 'com.github.gourav1908:CustomRetrofit:Version'
 	}
   ```
-  > Step 3. Add the version 1.0.2 inplace of Version
+  > Step 3. Add the version 1.2.1 inplace of Version
 
 
 > Step 4. Usage, Create a Singleton class for getting instance
