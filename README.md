@@ -54,11 +54,11 @@ object RetroInstance {
 			)
 			
 			/*If data is in **JSONArray** format then use below code to convert*/
-			val dataList = Gson().fromJson(response.Data.toString(), Array<PostModel>::class.java)
+			val dataList = Gson().fromJson(response.Data.toString(), Array<DataClass>::class.java)
                         .toList()
 		    
                     runOnUiThread {
-                        /* do UI related work */
+                        /* do UI related stuff */
                     }
                 } else {
                     /* if false - get error message basis on the error code */
