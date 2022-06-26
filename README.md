@@ -1,4 +1,4 @@
-# CustomRetrofit v-1.1.0
+# CustomRetrofit v-1.0.2
 A pre-defined Retforit Instance
  > Step 1. Add the JitPack repository to your build file
 
