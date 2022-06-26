@@ -57,13 +57,17 @@ object RetroInstance {
                     	response.Data.toString(),
                     	DataClass::class.java
 			)
+			
+			/*If data is in **JSONArray** format then use below code to convert*/
+			val dataList = Gson().fromJson(response.Data.toString(), Array<PostModel>::class.java)
+                        .toList()
 		    
-		    /*Note: here using **convertToList** method to get data in List<DataClass> format*/
-                	val dataList: List<Type> =
-                    	BuildRetrofit.convertToList(
-                        response.Data.toString(),
-                        listOf<DataClass>()::class.java
-                    )
+			    /*Also pre-defined method in Library*/
+        	        	val dataList: List<Type> =
+                	    	BuildRetrofit.convertToList(
+                        	response.Data.toString(),
+	                        listOf<DataClass>()::class.java
+        	            )
 		    
                     runOnUiThread {
                         /* do UI related work */
