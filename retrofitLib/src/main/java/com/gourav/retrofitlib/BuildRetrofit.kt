@@ -59,12 +59,12 @@ object BuildRetrofit {
     }
 
     //Use if response is in JSONArray as in [{...}]
-    fun convertToList(response: String, type: Type?): List<Type> {
+    /*fun convertToList(response: String, type: Type?): List<Type> {
         val json = JSONTokener(response).nextValue()
         return if (json is JSONArray) {
             Gson().fromJson<List<Type>?>(json.toString(), type).toList()
         } else {
             Gson().fromJson(json.toString(), type)
         }
-    }
+    }*/
 }

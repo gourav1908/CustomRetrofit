@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import com.google.gson.Gson
 import com.gourav.androidlibrary.api.APIService
 import com.gourav.androidlibrary.models.PostModel
 import com.gourav.retrofitlib.BuildRetrofit
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         val btn_click = findViewById<Button>(R.id.btn_click)
         btn_click.setOnClickListener {
             // Change BASE_URL is RetroInstance object as per the APIs below before using
-            getHeadlines() // URL = BASE_URL
+//            getHeadlines() // URL = BASE_URL
             getPosts() // URL = BASE_URL2
         }
     }
@@ -75,12 +76,15 @@ class MainActivity : AppCompatActivity() {
             if (response.status) {
                 /*if true - use convertResponse method to get response in your own data class object (here is PostModel)*/
                 /*Note: here using **convertToList** method to get data in List<PostModel> format*/
-                val postList =
+                val dataList =
+                    Gson().fromJson(response.Data.toString(), Array<PostModel>::class.java)
+                        .toList()
+                /*val postList =
                     BuildRetrofit.convertToList(
                         response.Data.toString(),
-                        listOf<PostModel>()::class.java
-                    )
-                Log.d(TAG, "onCreate: size ab ${postList.size}")
+                        PostModel::class.java
+                    )*/
+                Log.d(TAG, "onCreate: size ab ${dataList.size}")
                 runOnUiThread {
                     /*do UI related stuff*/
                 }
