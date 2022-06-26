@@ -20,4 +20,7 @@ interface APIService {
         @Query("category") category: String,
         @Query("apiKey") apiKey: String
     ): Response<JsonElement>
+
+    @GET("posts")
+    suspend fun getPosts(): Response<JsonElement>
 }

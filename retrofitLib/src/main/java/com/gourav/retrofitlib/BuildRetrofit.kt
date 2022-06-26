@@ -4,10 +4,13 @@ import com.google.gson.Gson
 import com.google.gson.JsonElement
 import com.gourav.retrofitlib.constants.ErrorMessage
 import com.gourav.retrofitlib.model.ResponseModel
+import org.json.JSONArray
+import org.json.JSONTokener
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import kotlin.reflect.KClass
+import java.lang.reflect.Type
+
 
 object BuildRetrofit {
     fun getRetrofitInstance(BASE_URL: String): Retrofit {
@@ -49,8 +52,19 @@ object BuildRetrofit {
         }
     }
 
-    fun <T : Any> convertResponse(response: String, classType: Class<T>): T {
-        val model = Gson().fromJson(response, classType)
-        return model
+    //Use if response is in JSONObject as in {...}
+    fun <T : Any> convertToObject(response: String, type: Class<T>): T {
+        val json = JSONTokener(response).nextValue()
+        return Gson().fromJson(json.toString(), type)
+    }
+
+    //Use if response is in JSONArray as in [{...}]
+    fun convertToList(response: String, type: Type?): List<Type> {
+        val json = JSONTokener(response).nextValue()
+        return if (json is JSONArray) {
+            Gson().fromJson<List<Type>?>(json.toString(), type).toList()
+        } else {
+            Gson().fromJson(json.toString(), type)
+        }
     }
 }
