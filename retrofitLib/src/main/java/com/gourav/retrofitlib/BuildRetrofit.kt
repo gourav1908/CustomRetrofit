@@ -7,6 +7,7 @@ import com.gourav.retrofitlib.model.ResponseModel
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.reflect.KClass
 
 object BuildRetrofit {
     fun getRetrofitInstance(BASE_URL: String): Retrofit {
@@ -46,5 +47,10 @@ object BuildRetrofit {
                 )
             }
         }
+    }
+
+    fun <T : Any> convertResponse(response: String, classType: Class<T>): T {
+        val model = Gson().fromJson(response, classType)
+        return model
     }
 }
