@@ -1,4 +1,4 @@
-# CustomRetrofit v-1.2.1
+# CustomRetrofit v-1.2.2
 A pre-defined Retforit Instance
  > Step 1. Add the JitPack repository to your build file
 
@@ -17,7 +17,7 @@ dependencies {
 	        implementation 'com.github.gourav1908:CustomRetrofit:Version'
 	}
   ```
-  > Step 3. Add the version 1.2.1 inplace of Version
+  > Step 3. Add the version 1.2.2 inplace of Version
 
 
 > Step 4. Usage, Create a Singleton class for getting instance
@@ -46,12 +46,7 @@ object RetroInstance {
 
                 /* check response status if true or false */
                 if (response.status) {
-                    /* if true - use **convertResponse** method to get response in your own data class object */
-                    val data: DataClass = BuildRetrofit.convertResponse(
-                        response.Data.toString(),
-                        DataClass::class.java
-                    )
-		    
+                    /* if true - convert the response into your own data class object */
 		    /*Note: here using **convertToObject** method to get data in DataClass object format*/
                 	val data: DataClass = BuildRetrofit.convertToObject(
                     	response.Data.toString(),
@@ -61,13 +56,6 @@ object RetroInstance {
 			/*If data is in **JSONArray** format then use below code to convert*/
 			val dataList = Gson().fromJson(response.Data.toString(), Array<PostModel>::class.java)
                         .toList()
-		    
-			    /*Also pre-defined method in Library*/
-        	        	val dataList: List<Type> =
-                	    	BuildRetrofit.convertToList(
-                        	response.Data.toString(),
-	                        listOf<DataClass>()::class.java
-        	            )
 		    
                     runOnUiThread {
                         /* do UI related work */
